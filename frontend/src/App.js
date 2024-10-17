@@ -7,9 +7,13 @@ import React, { useState, useMemo } from "react";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Income from "./Components/Incomes/Incomes";
 import Expenses from "./Components/Expenses/Expenses";
+import { useGlobalContext } from "./context/globalContext";
 
 function App() {
   const [active, setActive] = React.useState(1);
+
+  const global = useGlobalContext()
+  console.log(global);
 
   
   const displayData = () => {
