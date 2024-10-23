@@ -1,5 +1,8 @@
 import styled, { keyframes } from "styled-components";
 import React, { useState } from "react";
+//import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 
 const RegisterForm = () => {
@@ -11,6 +14,7 @@ const RegisterForm = () => {
   });
 
   const [error, setError] = useState("");
+  //const navigate = useNavigate(); // Initialize navigate
 
   const handleChange = (e) => {
     setFormData({
@@ -36,6 +40,8 @@ const RegisterForm = () => {
         );
 
         console.log("Successfully sent !!!", response);
+        toast.success("Successfully Registered!")
+        //navigate("/"); // Redirect to login page after successful registration
       } catch (error) {
         console.log("Error", error);
       }
@@ -48,40 +54,40 @@ const RegisterForm = () => {
         <h2>Register</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label>Username</label>
             <input
               type="text"
               name="username"
+              placeholder="Username"
               value={formData.username}
               onChange={handleChange}
               required
             />
           </div>
           <div>
-            <label>Email</label>
             <input
               type="email"
               name="email"
+              placeholder="Email"
               value={formData.email}
               onChange={handleChange}
               required
             />
           </div>
           <div>
-            <label>Password</label>
             <input
               type="password"
               name="password"
+              placeholder="Password"
               value={formData.password}
               onChange={handleChange}
               required
             />
           </div>
           <div>
-            <label>Confirm Password</label>
             <input
               type="password"
               name="confirmPassword"
+              placeholder="Confirm Password"
               value={formData.confirmPassword}
               onChange={handleChange}
               required
@@ -89,6 +95,34 @@ const RegisterForm = () => {
           </div>
           {error && <p className="error">{error}</p>}
           <button type="submit">Register</button>
+          <ToastContainer   />
+          <a
+            href="http://localhost:3000/"
+            style={{
+              textDecoration: "none",
+              color: "white",
+              paddingLeft: "10px",
+              fontSize: "18px"
+            }}
+          >
+            Have an account?{" "}
+            <span className="f" style={{ fontWeight: "bold" }}>Log In</span>
+          </a>
+          <p>or you can sign in with</p>
+          <div className="social-login">
+            <button className="social-icon google">
+              <i class="fa-brands fa-google"></i>
+            </button>
+            <button className="social-icon facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </button>
+            <a
+              href="https://github.com/mathav-ramalingam/Expense_Tracker.git"
+              className="social-icon github"
+            >
+              <i class="fa-brands fa-github"></i>
+            </a>
+          </div>
         </form>
       </div>
     </RegisterStyled>
@@ -114,21 +148,29 @@ const RegisterStyled = styled.div`
   height: 100vh;
   background: #f2f2f2;
 
+  .f{
+    &:hover
+    {
+     color:black;
+    }
+  }
+
   .Register {
-    padding: 2rem 1.5rem;
+    padding: 2rem;
     width: 400px;
-    background: rgba(252, 226, 249, 0.78);
-    border: 3px solid #ffffff;
-    backdrop-filter: blur(4.5px);
-    border-radius: 32px;
+    background: linear-gradient(145deg, #F7D4E6, #FAAFD5);
+    box-shadow: 0 0 15px 4px ;
+    border-radius: 25px;
     animation: ${fadeIn} 0.5s ease-in-out;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    text-align: center;
 
     h2 {
-      color: rgba(34, 34, 96, 1);
-      text-align: center;
+      color: black;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
     }
 
     form {
@@ -136,20 +178,13 @@ const RegisterStyled = styled.div`
       flex-direction: column;
       gap: 1rem;
 
-      label {
-        color: rgba(34, 34, 96, 0.8);
-      }
-
       input {
-        padding: 0.75rem;
-        border-radius: 8px;
-        border: 2px solid rgba(34, 34, 96, 0.1);
-        outline: none;
-        transition: all 0.3s ease;
-
-        &:focus {
-          border-color: rgba(34, 34, 96, 0.6);
-        }
+        padding: 1rem;
+        border-radius: 50px;
+        border: none;
+        font-size: 1rem;
+        width: 100%;
+        box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.1);
       }
 
       .error {
@@ -159,17 +194,59 @@ const RegisterStyled = styled.div`
       }
 
       button {
-        padding: 0.75rem;
-        background-color: #222260;
-        color: #fff;
+        padding: 1rem;
+        background-color: #27ae60;
+        color: white;
         border: none;
-        border-radius: 8px;
+        border-radius: 50px;
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
 
         &:hover {
-          background-color: #1a1a50;
+          background-color: #2ecc71;
         }
+      }
+    }
+
+    p {
+      color: white;
+      margin: 0rem 0;
+    }
+
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+
+      .social-icon {
+        background-color: white;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.8);
+        }
+      }
+
+      .google {
+        color: black;
+      }
+
+      .facebook {
+        color: black;
+      }
+
+      .github {
+        color: black;
       }
     }
   }
