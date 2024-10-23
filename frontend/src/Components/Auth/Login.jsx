@@ -52,7 +52,6 @@ const LoginForm = () => {
         });
       }
     } catch (error) {
-      // Handle login failure (e.g., incorrect credentials)
       if (error.response && error.response.status === 401) {
         setError("Invalid email or password");
       } else {
@@ -63,35 +62,55 @@ const LoginForm = () => {
   };
 
   return (
+    <>
     <LoginStyled>
-      <div className="Login">
+      <div className="login-container">
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label>Email</label>
             <input
               type="email"
               name="email"
+              placeholder="Email"
               value={formData.email}
               onChange={handleChange}
               required
             />
           </div>
           <div>
-            <label>Password</label>
             <input
               type="password"
               name="password"
+              placeholder="Password"
               value={formData.password}
               onChange={handleChange}
               required
             />
           </div>
           {error && <p className="error">{error}</p>}
-          <button type="submit">Login</button>
+          <button type="submit">Log In</button>
+          <a
+            href="http://localhost:3000/register"
+            style={{
+              textDecoration: "none",
+              color: "white",
+              paddingLeft: "10px",
+              fontSize: "18px",
+            }}
+          >
+            Don't have an account?{" "}
+            <span className="f" style={{ fontWeight: "bold" }}>Sign Up</span>
+          </a>
+          <p>or you can sign in with</p>
+          <div className="social-login">
+            <button className="social-icon google"><i class="fa-brands fa-google"></i></button>
+            <button className="social-icon facebook"><i class="fa-brands fa-facebook-f"></i></button>
+            <a href="https://github.com/mathav-ramalingam/Expense_Tracker.git" className="social-icon github"><i class="fa-brands fa-github"></i></a>
+          </div>
         </form>
       </div>
     </LoginStyled>
+    </>
   );
 };
 
@@ -113,22 +132,28 @@ const LoginStyled = styled.div`
   align-items: center;
   height: 100vh;
   background: #f2f2f2;
-
-  .Login {
-    padding: 2rem 1.5rem;
+  box-shadow:  10px 4px 10px red;
+  
+  .f{
+    &:hover
+    {
+     color:black;
+    }
+  }
+  
+  .login-container {
     width: 400px;
-    background: rgba(252, 226, 249, 0.78);
-    border: 3px solid #ffffff;
-    backdrop-filter: blur(4.5px);
-    border-radius: 32px;
+    background: linear-gradient(145deg, #F7D4E6, #FAAFD5);
+    padding: 2rem;
+    border-radius: 25px;
+    box-shadow: 0 0 15px 4px ;
+    text-align: center;
     animation: ${fadeIn} 0.5s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
 
     h2 {
-      color: rgba(34, 34, 96, 1);
-      text-align: center;
+      olor: black;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     form {
@@ -136,19 +161,27 @@ const LoginStyled = styled.div`
       flex-direction: column;
       gap: 1rem;
 
-      label {
-        color: rgba(34, 34, 96, 0.8);
+      input {
+        padding: 1rem;
+        border-radius: 50px;
+        border: none;
+        box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.1);
+        font-size: 1rem;
+        width: 100%;
       }
 
-      input {
-        padding: 0.75rem;
-        border-radius: 8px;
-        border: 2px solid rgba(34, 34, 96, 0.1);
-        outline: none;
+      button[type="submit"] {
+        padding: 1rem;
+        background-color: #27ae60;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-size: 1.2rem;
+        cursor: pointer;
         transition: all 0.3s ease;
 
-        &:focus {
-          border-color: rgba(34, 34, 96, 0.6);
+        &:hover {
+          background-color: #2ecc71;
         }
       }
 
@@ -158,17 +191,44 @@ const LoginStyled = styled.div`
         font-weight: bold;
       }
 
-      button {
-        padding: 0.75rem;
-        background-color: #222260;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
+      p {
+        color: white;
+        margin: 0rem 0;
+      }
 
-        &:hover {
-          background-color: #1a1a50;
+      .social-login {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+
+        .social-icon {
+          background-color: white;
+          border: none;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          font-size: 1.5rem;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+          }
+        }
+
+        .google {
+          color: black;
+        }
+
+        .facebook {
+          color: black;
+        }
+
+        .github {
+          color: black;
         }
       }
     }
