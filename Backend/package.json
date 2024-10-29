@@ -2,9 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "app.js",
-  "scripts": {
-      "start": "./node_modules/.bin/nodemon app.js"
-  },
+ "scripts": {
+  "start": "npx nodemon app.js"
+},
   "author": "",
   "license": "ISC",
   "description": "",
