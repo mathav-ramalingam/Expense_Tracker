@@ -1,8 +1,8 @@
 import styled, { keyframes } from "styled-components";
 import React, { useState } from "react";
 //import { useNavigate } from "react-router-dom"; // Import useNavigate
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const RegisterForm = () => {
@@ -31,7 +31,7 @@ const RegisterForm = () => {
       setError("");
       try {
         const response = await axios.post(
-          "http://localhost:5050/api/v1/data-api",
+          "https://expense-backend-jepr.onrender.com/data-api",
           {
             username: formData.username,
             email: formData.email,
@@ -40,7 +40,7 @@ const RegisterForm = () => {
         );
 
         console.log("Successfully sent !!!", response);
-        toast.success("Successfully Registered!")
+        toast.success("Successfully Registered!");
         //navigate("/"); // Redirect to login page after successful registration
       } catch (error) {
         console.log("Error", error);
@@ -95,18 +95,20 @@ const RegisterForm = () => {
           </div>
           {error && <p className="error">{error}</p>}
           <button type="submit">Register</button>
-          <ToastContainer   />
+          <ToastContainer />
           <a
             href="http://localhost:3000/"
             style={{
               textDecoration: "none",
               color: "white",
               paddingLeft: "10px",
-              fontSize: "18px"
+              fontSize: "18px",
             }}
           >
             Have an account?{" "}
-            <span className="f" style={{ fontWeight: "bold" }}>Log In</span>
+            <span className="f" style={{ fontWeight: "bold" }}>
+              Log In
+            </span>
           </a>
           <p>or you can sign in with</p>
           <div className="social-login">
@@ -148,18 +150,17 @@ const RegisterStyled = styled.div`
   height: 100vh;
   background: #f2f2f2;
 
-  .f{
-    &:hover
-    {
-     color:black;
+  .f {
+    &:hover {
+      color: black;
     }
   }
 
   .Register {
     padding: 2rem;
     width: 400px;
-    background: linear-gradient(145deg, #F7D4E6, #FAAFD5);
-    box-shadow: 0 0 15px 4px ;
+    background: linear-gradient(145deg, #f7d4e6, #faafd5);
+    box-shadow: 0 0 15px 4px;
     border-radius: 25px;
     animation: ${fadeIn} 0.5s ease-in-out;
     display: flex;

@@ -34,7 +34,7 @@ const LoginForm = () => {
     try {
       // Send login request
       const response = await axios.post(
-        "http://localhost:5050/api/v1/data-login",
+        "https://expense-backend-jepr.onrender.com/data-login",
         {
           email: formData.email,
           password: formData.password,
@@ -63,53 +63,64 @@ const LoginForm = () => {
 
   return (
     <>
-    <LoginStyled>
-      <div className="login-container">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          {error && <p className="error">{error}</p>}
-          <button type="submit">Log In</button>
-          <a
-            href="http://localhost:3000/register"
-            style={{
-              textDecoration: "none",
-              color: "white",
-              paddingLeft: "10px",
-              fontSize: "18px",
-            }}
-          >
-            Don't have an account?{" "}
-            <span className="f" style={{ fontWeight: "bold" }}>Sign Up</span>
-          </a>
-          <p>or you can sign in with</p>
-          <div className="social-login">
-            <button className="social-icon google"><i class="fa-brands fa-google"></i></button>
-            <button className="social-icon facebook"><i class="fa-brands fa-facebook-f"></i></button>
-            <a href="https://github.com/mathav-ramalingam/Expense_Tracker.git" className="social-icon github"><i class="fa-brands fa-github"></i></a>
-          </div>
-        </form>
-      </div>
-    </LoginStyled>
+      <LoginStyled>
+        <div className="login-container">
+          <h2>Login</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            {error && <p className="error">{error}</p>}
+            <button type="submit">Log In</button>
+            <a
+              href="http://localhost:3000/register"
+              style={{
+                textDecoration: "none",
+                color: "white",
+                paddingLeft: "10px",
+                fontSize: "18px",
+              }}
+            >
+              Don't have an account?{" "}
+              <span className="f" style={{ fontWeight: "bold" }}>
+                Sign Up
+              </span>
+            </a>
+            <p>or you can sign in with</p>
+            <div className="social-login">
+              <button className="social-icon google">
+                <i class="fa-brands fa-google"></i>
+              </button>
+              <button className="social-icon facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </button>
+              <a
+                href="https://github.com/mathav-ramalingam/Expense_Tracker.git"
+                className="social-icon github"
+              >
+                <i class="fa-brands fa-github"></i>
+              </a>
+            </div>
+          </form>
+        </div>
+      </LoginStyled>
     </>
   );
 };
@@ -132,21 +143,20 @@ const LoginStyled = styled.div`
   align-items: center;
   height: 100vh;
   background: #f2f2f2;
-  box-shadow:  10px 4px 10px red;
-  
-  .f{
-    &:hover
-    {
-     color:black;
+  box-shadow: 10px 4px 10px red;
+
+  .f {
+    &:hover {
+      color: black;
     }
   }
-  
+
   .login-container {
     width: 400px;
-    background: linear-gradient(145deg, #F7D4E6, #FAAFD5);
+    background: linear-gradient(145deg, #f7d4e6, #faafd5);
     padding: 2rem;
     border-radius: 25px;
-    box-shadow: 0 0 15px 4px ;
+    box-shadow: 0 0 15px 4px;
     text-align: center;
     animation: ${fadeIn} 0.5s ease-in-out;
 
