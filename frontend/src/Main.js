@@ -10,6 +10,7 @@ import Income from "./Components/Incomes/Incomes";
 import Expenses from "./Components/Expenses/Expenses";
 import { useGlobalContext } from "./context/globalContext";
 import ViewTransaction from "./Components/ViewTransaction/ViewTransaction";
+import Visual from "./Visual/Visual";
 
 function Main() {
   const [active, setActive] = React.useState(1);
@@ -27,6 +28,8 @@ function Main() {
         return <Income />;
       case 4:
         return <Expenses />;
+      case 5:
+        return <Visual />;
       default:
         return <Dashboard />;
     }
