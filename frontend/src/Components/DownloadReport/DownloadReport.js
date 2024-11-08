@@ -19,33 +19,53 @@ function DownloadReport() {
     });
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+  };
+
   const downloadPDF = () => {
     const filteredIncomes = filterData(incomes);
     const filteredExpenses = filterData(expenses);
     const doc = new jsPDF();
 
     // Document title and filters
+    doc.setFontSize(16);
     doc.text("User Financial Report", 20, 20);
-    doc.text(`Month: ${month || "All"} Year: ${year || "All"}`, 20, 30);
+    doc.setFontSize(12);
+    doc.text(`Month: ${month || "All"} | Year: ${year || "All"}`, 20, 30);
 
     // Adding income details
+    doc.setFontSize(14);
     doc.text("Income Details:", 20, 50);
+    doc.setFontSize(12);
+    let yOffset = 60;
     filteredIncomes.forEach((income, index) => {
       doc.text(
-        `${index + 1}. ${income.description} - $${income.amount} on ${income.date}`,
+        `${index + 1}. ${income.description} - $${
+          income.amount
+        } on ${formatDate(income.date)}`,
         20,
-        60 + index * 10
+        yOffset
       );
+      yOffset += 10;
     });
 
     // Adding expense details
-    doc.text("Expense Details:", 20, 80 + filteredIncomes.length * 10);
+    yOffset += 10;
+    doc.setFontSize(14);
+    doc.text("Expense Details:", 20, yOffset);
+    doc.setFontSize(12);
+    yOffset += 10;
     filteredExpenses.forEach((expense, index) => {
       doc.text(
-        `${index + 1}. ${expense.description} - $${expense.amount} on ${expense.date}`,
+        `${index + 1}. ${expense.description} - $${
+          expense.amount
+        } on ${formatDate(expense.date)}`,
         20,
-        90 + (filteredIncomes.length + index) * 10
+        yOffset
       );
+      yOffset += 10;
     });
 
     doc.save("financial_report.pdf");
@@ -72,7 +92,8 @@ function DownloadReport() {
             ))}
           </select>
           <button className="b" onClick={downloadPDF}>
-            <i className="fas fa-download " style={{ fontSize: "13px" }}></i> 
+            <i className="fas fa-download" style={{ fontSize: "13px" }}></i>{" "}
+            {/* Icon with increased size */}
           </button>
         </div>
       </div>
@@ -110,7 +131,6 @@ const DownloadReportStyled = styled.div`
       margin-left: 10px;
       i {
         margin-right: 5px;
-
       }
     }
   }

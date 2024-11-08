@@ -4,6 +4,26 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import image from "../../img/image.png";
+
+const Navbar = () => {
+  return (
+    <NavbarStyled>
+      <div className="navbar-container">
+        <div className="logo">
+          <img src={image} alt="App Logo" />
+          <span className="app-title">Expense Tracker</span>
+        </div>
+        <div className="auth-buttons">
+          <a href="http://localhost:3000/">
+            <button className="signup-btn">Login</button>{" "}
+          </a>
+          <button className="login-btn">Sign Up</button>
+        </div>
+      </div>
+    </NavbarStyled>
+  );
+};
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -31,7 +51,7 @@ const RegisterForm = () => {
       setError("");
       try {
         const response = await axios.post(
-          "https://expense-backend-jepr.onrender.com/data-api",
+          "http://localhost:5050/api/v1/data-api",
           {
             username: formData.username,
             email: formData.email,
@@ -49,85 +69,88 @@ const RegisterForm = () => {
   };
 
   return (
-    <RegisterStyled>
-      <div className="Register">
-        <h2>Register</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formData.username}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          {error && <p className="error">{error}</p>}
-          <button type="submit">Register</button>
-          <ToastContainer />
-          <a
-            href="http://localhost:3000/"
-            style={{
-              textDecoration: "none",
-              color: "white",
-              paddingLeft: "10px",
-              fontSize: "18px",
-            }}
-          >
-            Have an account?{" "}
-            <span className="f" style={{ fontWeight: "bold" }}>
-              Log In
-            </span>
-          </a>
-          <p>or you can sign in with</p>
-          <div className="social-login">
-            <button className="social-icon google">
-              <i class="fa-brands fa-google"></i>
-            </button>
-            <button className="social-icon facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-            </button>
+    <>
+      <Navbar />
+      <RegisterStyled>
+        <div className="Register">
+          <h2>Register</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            {error && <p className="error">{error}</p>}
+            <button type="submit">Register</button>
+            <ToastContainer />
             <a
-              href="https://github.com/mathav-ramalingam/Expense_Tracker.git"
-              className="social-icon github"
+              href="http://localhost:3000/"
+              style={{
+                textDecoration: "none",
+                color: "white",
+                paddingLeft: "10px",
+                fontSize: "18px",
+              }}
             >
-              <i class="fa-brands fa-github"></i>
+              Have an account?{" "}
+              <span className="f" style={{ fontWeight: "bold" }}>
+                Log In
+              </span>
             </a>
-          </div>
-        </form>
-      </div>
-    </RegisterStyled>
+            <p>or you can sign in with</p>
+            <div className="social-login">
+              <button className="social-icon google">
+                <i class="fa-brands fa-google"></i>
+              </button>
+              <button className="social-icon facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </button>
+              <a
+                href="https://github.com/mathav-ramalingam/Expense_Tracker.git"
+                className="social-icon github"
+              >
+                <i class="fa-brands fa-github"></i>
+              </a>
+            </div>
+          </form>
+        </div>
+      </RegisterStyled>
+    </>
   );
 };
 
@@ -140,6 +163,63 @@ const fadeIn = keyframes`
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+`;
+
+const NavbarStyled = styled.nav`
+  width: 100%;
+  background: #333;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+      }
+
+      .app-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #fff;
+      }
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+
+      .login-btn,
+      .signup-btn {
+        background-color: transparent;
+        border: 1px solid #fff;
+        border-radius: 20px;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: #fff;
+          color: #333;
+        }
+      }
+    }
   }
 `;
 
