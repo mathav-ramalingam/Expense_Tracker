@@ -4,46 +4,71 @@ import avatar from "../../img/avatar.png";
 import { signout } from "../../utils/Icons";
 import { menuItems } from "../../utils/menuItems";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FaBars } from "react-icons/fa"; // import the hamburger icon
 
 function Navigation({ active, setActive }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { state } = location;
 
-  console.log(state.username);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   return (
-    <NavStyled>
-      <div className="user-con">
-        <img src={avatar} alt="" />
-        <div className="text">
-          <h2>{state.username}</h2>
+    <>
+      <HamburgerButton onClick={toggleSidebar}>
+        <FaBars />
+      </HamburgerButton>
+      <NavStyled isSidebarOpen={isSidebarOpen}>
+        <div className="user-con">
+          <img src={avatar} alt="" />
+          <div className="text">
+            <h2>{state.username}</h2>
+          </div>
         </div>
-      </div>
-      <ul className="menu-items">
-        {menuItems.map((item) => {
-          return (
+        <ul className="menu-items">
+          {menuItems.map((item) => (
             <li
               key={item.id}
-              onClick={() => setActive(item.id)}
+              onClick={() => {
+                setActive(item.id);
+                setIsSidebarOpen(false); // close sidebar after clicking on an item
+              }}
               className={active === item.id ? "active" : ""}
             >
               {item.icon}
               <span>{item.title}</span>
             </li>
-          );
-        })}
-      </ul>
-      <div
-        className="bottom-nav"
-        style={{cursor: "pointer"}}
-        onClick={() => navigate("/")}
-      >
-        <li>{signout} Sign Out</li>
-      </div>
-    </NavStyled>
+          ))}
+        </ul>
+        <div
+          className="bottom-nav"
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/")}
+        >
+          <li>{signout} Sign Out</li>
+        </div>
+      </NavStyled>
+    </>
   );
 }
+
+const HamburgerButton = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
 
 const NavStyled = styled.nav`
   padding: 2rem 1.5rem;
@@ -57,6 +82,19 @@ const NavStyled = styled.nav`
   flex-direction: column;
   justify-content: space-between;
   gap: 2rem;
+  transition: transform 0.3s ease;
+  transform: ${({ isSidebarOpen }) =>
+    isSidebarOpen ? "translateX(0)" : "translateX(-100%)"};
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  @media (min-width: 769px) {
+    transform: translateX(0); /* Always show sidebar on larger screens */
+    position: static;
+  }
+
   .user-con {
     height: 100px;
     display: flex;
@@ -117,6 +155,19 @@ const NavStyled = styled.nav`
       height: 100%;
       background: #222260;
       border-radius: 0 10px 10px 0;
+    }
+  }
+
+  .bottom-nav {
+    margin-top: auto;
+    li {
+      color: rgba(34, 34, 96, 0.6);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      i {
+        margin-right: 10px;
+      }
     }
   }
 `;
