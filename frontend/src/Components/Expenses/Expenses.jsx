@@ -7,8 +7,7 @@ import ExpenseForm from "./ExpenseForm";
 import { expenses } from "../../utils/Icons";
 
 function Expenses() {
-  const { expenses, getExpenses, deleteExpense, totalExpenses } =
-    useGlobalContext();
+  const { expenses, getExpenses, deleteExpense, totalExpenses } = useGlobalContext();
 
   useEffect(() => {
     getExpenses();
@@ -26,8 +25,7 @@ function Expenses() {
           </div>
           <div className="incomes">
             {expenses.map((income) => {
-              const { _id, title, amount, date, category, description, type } =
-                income;
+              const { _id, title, amount, date, category, description, type } = income;
               return (
                 <IncomeItem
                   key={_id}
@@ -76,6 +74,12 @@ const ExpenseStyled = styled.div`
     gap: 2rem;
     .incomes {
       flex: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .income-content {
+      flex-direction: column;
     }
   }
 `;

@@ -6,10 +6,8 @@ import { useGlobalContext } from '../../context/globalContext';
 import Button from '../Button/Button';
 import { plus } from '../../utils/Icons';
 
-
-
 function ExpenseForm() {
-    const {addExpense } = useGlobalContext()
+    const { addExpense } = useGlobalContext()
     const [inputState, setInputState] = useState({
         title: '',
         amount: '',
@@ -18,7 +16,7 @@ function ExpenseForm() {
         description: '',
     })
 
-    const { title, amount, date, category,description } = inputState;
+    const { title, amount, date, category, description } = inputState;
 
     const handleInput = name => e => {
         setInputState({...inputState, [name]: e.target.value})
@@ -88,14 +86,13 @@ function ExpenseForm() {
                     icon={plus}
                     bPad={'.8rem 1.6rem'}
                     bRad={'30px'}
-                    bg={'var(--color-accent'}
+                    bg={'var(--color-accent)'}
                     color={'#fff'}
                 />
             </div>
         </ExpenseFormStyled>
     )
 }
-
 
 const ExpenseFormStyled = styled.form`
     display: flex;
@@ -142,5 +139,18 @@ const ExpenseFormStyled = styled.form`
             }
         }
     }
+
+    @media (max-width: 768px) {
+        .input-control input,
+        .input-control textarea,
+        .selects select {
+            font-size: 14px;
+            padding: 0.5rem;
+        }
+        .submit-btn button {
+            width: 100%;
+        }
+    }
 `;
-export default ExpenseForm
+
+export default ExpenseForm;
