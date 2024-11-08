@@ -80,7 +80,7 @@ function Form() {
           </option>
           <option value="salary">Salary</option>
           <option value="freelancing">Freelancing</option>
-          <option value="investments">Investiments</option>
+          <option value="investments">Investments</option>
           <option value="stocks">Stocks</option>
           <option value="bitcoin">Bitcoin</option>
           <option value="bank">Bank Transfer</option>
@@ -105,7 +105,7 @@ function Form() {
           icon={plus}
           bPad={".8rem 1.6rem"}
           bRad={"30px"}
-          bg={"var(--color-accent"}
+          bg={"var(--color-accent)"}
           color={"#fff"}
         />
       </div>
@@ -117,6 +117,7 @@ const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
   input,
   textarea,
   select {
@@ -131,10 +132,12 @@ const FormStyled = styled.form`
     resize: none;
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
     color: rgba(34, 34, 96, 0.9);
+
     &::placeholder {
       color: rgba(34, 34, 96, 0.4);
     }
   }
+
   .input-control {
     input {
       width: 100%;
@@ -144,8 +147,10 @@ const FormStyled = styled.form`
   .selects {
     display: flex;
     justify-content: flex-end;
+
     select {
       color: rgba(34, 34, 96, 0.4);
+
       &:focus,
       &:active {
         color: rgba(34, 34, 96, 1);
@@ -156,10 +161,29 @@ const FormStyled = styled.form`
   .submit-btn {
     button {
       box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+
       &:hover {
         background: var(--color-green) !important;
       }
     }
   }
+
+  @media (max-width: 768px) {
+    gap: 1.5rem;
+    .selects {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+
+    input,
+    textarea,
+    select {
+      padding: 0.5rem;
+    }
+  }
 `;
+
 export default Form;

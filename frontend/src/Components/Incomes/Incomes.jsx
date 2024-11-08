@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { InnerLayout } from "../../styles/Layouts";
 import { useGlobalContext } from "../../context/globalContext";
@@ -6,7 +6,8 @@ import Form from "../Form/Form";
 import IncomeItem from "../IncomeItem/IncomeItem";
 
 function Income() {
-  const { addIncome, incomes, getIncomes, deleteIncome, totalIncome } = useGlobalContext();
+  const { addIncome, incomes, getIncomes, deleteIncome, totalIncome } =
+    useGlobalContext();
 
   useEffect(() => {
     getIncomes();
@@ -15,8 +16,9 @@ function Income() {
   return (
     <IncomeStyled>
       <InnerLayout>
-    
-        <h2 className='total-income'>TOTAL INCOME: <span>${totalIncome()}</span></h2>
+        <h2 className="total-income">
+          TOTAL INCOME: <span>${totalIncome()}</span>
+        </h2>
         <div className="income-content">
           <div className="form-container">
             <Form />
@@ -48,32 +50,52 @@ function Income() {
 }
 
 const IncomeStyled = styled.div`
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  .total-income {
     display: flex;
-    overflow: auto;
-    .total-income{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #FCF6F9;
-        border: 2px solid #FFFFFF;
-        box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
-        border-radius: 20px;
-        padding: 1rem;
-        margin: 1rem 0;
-        font-size: 2rem;
-        gap: .5rem;
-        span{
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--color-green);
-        }
+    justify-content: center;
+    align-items: center;
+    background: #fcf6f9;
+    border: 2px solid #ffffff;
+    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-size: 2rem;
+    gap: 0.5rem;
+
+    span {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--color-green);
     }
-    .income-content{
-        display: flex;
-        gap: 2rem;
-        .incomes{
-            flex: 1;
-        }
+  }
+
+  .income-content {
+    display: flex;
+    gap: 2rem;
+
+    .incomes {
+      flex: 1;
     }
+  }
+
+  @media (max-width: 768px) {
+    .income-content {
+      flex-direction: column;
+    }
+    .total-income {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .total-income {
+      font-size: 1.2rem;
+    }
+  }
 `;
+
 export default Income;

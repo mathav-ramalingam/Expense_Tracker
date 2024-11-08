@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { bitcoin, book, calender, card, circle, clothing, comment, dollar, food, freelance, medical, money, piggy, stocks, takeaway, trash, tv, users, yt } from '../../utils/Icons';
 import Button from '../Button/Button';
-import {dateFormat} from '../../utils/dateFormat'
+import { dateFormat } from '../../utils/dateFormat'
 
 function IncomeItem({
     id,
@@ -16,8 +16,7 @@ function IncomeItem({
     type
 }) {
 
-
-    const categoryIcon = () =>{
+    const categoryIcon = () => {
         switch(category) {
             case 'salary':
                 return money;
@@ -111,6 +110,7 @@ const IncomeItemStyled = styled.div`
     gap: 1rem;
     width: 100%;
     color: #222260;
+    
     .icon{
         width: 80px;
         height: 80px;
@@ -120,6 +120,7 @@ const IncomeItemStyled = styled.div`
         align-items: center;
         justify-content: center;
         border: 2px solid #FFFFFF;
+        
         i{
             font-size: 2.6rem;
         }
@@ -130,6 +131,7 @@ const IncomeItemStyled = styled.div`
         display: flex;
         flex-direction: column;
         gap: .2rem;
+        
         h5{
             font-size: 1.3rem;
             padding-left: 2rem;
@@ -151,10 +153,12 @@ const IncomeItemStyled = styled.div`
             display: flex;
             justify-content: space-between;
             align-items: center;
+            
             .text{
                 display: flex;
                 align-items: center;
                 gap: 1.5rem;
+                
                 p{
                     display: flex;
                     align-items: center;
@@ -165,7 +169,62 @@ const IncomeItemStyled = styled.div`
             }
         }
     }
+
+    @media (max-width: 768px) {
+        padding: 0.8rem;
+        gap: 0.8rem;
+
+        .icon {
+            width: 60px;
+            height: 60px;
+        }
+
+        .content {
+            gap: 0.8rem;
+            h5 {
+                font-size: 1.2rem;
+                padding-left: 1rem;
+            }
+            .inner-content {
+                flex-direction: column;
+                gap: 1rem;
+                .text {
+                    gap: 1rem;
+                    p {
+                        font-size: 0.9rem;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 0.6rem;
+        gap: 0.6rem;
+
+        .icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .content {
+            gap: 0.6rem;
+            h5 {
+                font-size: 1rem;
+                padding-left: 0.5rem;
+            }
+            .inner-content {
+                flex-direction: column;
+                gap: 0.8rem;
+                .text {
+                    gap: 0.8rem;
+                    p {
+                        font-size: 0.8rem;
+                    }
+                }
+            }
+        }
+    }
 `;
 
-
-export default IncomeItem
+export default IncomeItem;
