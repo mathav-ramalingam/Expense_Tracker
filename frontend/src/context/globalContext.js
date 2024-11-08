@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 
-const BASE_URL = "https://expense-backend-jepr.onrender.com/";
+const BASE_URL = "http://localhost:5050/api/v1/";
 
 const GlobalContext = React.createContext();
 
@@ -79,7 +79,7 @@ export const GlobalProvider = ({ children }) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
-    return history.slice(0, 3);
+    return history.slice(0,3);
   };
 
   const transactionHistoryforview = () => {
@@ -108,7 +108,7 @@ export const GlobalProvider = ({ children }) => {
         transactionHistory,
         error,
         setError,
-        transactionHistoryforview,
+        transactionHistoryforview
       }}
     >
       {children}
