@@ -4,6 +4,7 @@ import {
   transactions,
   trend,
   stocks,
+  reportIcon,
 } from "../utils/Icons";
 
 export const menuItems = [
@@ -35,6 +36,12 @@ export const menuItems = [
     id: 5,
     title: "Visual",
     icon: stocks,
+    link: "/dashboard",
+  },
+  {
+    id: 6,
+    title: "Report",
+    icon: reportIcon,
     link: "/dashboard",
   },
 ];

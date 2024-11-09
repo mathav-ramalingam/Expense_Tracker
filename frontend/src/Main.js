@@ -11,6 +11,7 @@ import Expenses from "./Components/Expenses/Expenses";
 import { useGlobalContext } from "./context/globalContext";
 import ViewTransaction from "./Components/ViewTransaction/ViewTransaction";
 import Visual from "./Visual/Visual";
+import DownloadReport from "./Components/DownloadReport/DownloadReport";
 
 function Main() {
   const [active, setActive] = React.useState(1);
@@ -30,6 +31,8 @@ function Main() {
         return <Expenses />;
       case 5:
         return <Visual />;
+      case 6:
+        return <DownloadReport />;
       default:
         return <Dashboard />;
     }

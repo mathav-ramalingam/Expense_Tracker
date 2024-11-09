@@ -1,18 +1,15 @@
-import React from 'react'
-import PieChart from '../Components/Chart/PieChart'
-import BarChart from '../Components/Chart/BarChart'
-import DownloadReport from '../Components/DownloadReport/DownloadReport'
-
+import React from "react";
+import PieChart from "../Components/Chart/PieChart";
+import BarChart from "../Components/Chart/BarChart";
+import DownloadReport from "../Components/DownloadReport/DownloadReport";
 
 const Visual = () => {
   return (
     <>
-    <DownloadReport />
-    <PieChart />
-    <BarChart />
-
+      <PieChart />
+      <BarChart />
     </>
-  )
-}
+  );
+};
 
-export default Visual
+export default Visual;
