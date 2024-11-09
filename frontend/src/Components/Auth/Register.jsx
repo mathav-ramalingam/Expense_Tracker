@@ -51,7 +51,7 @@ const RegisterForm = () => {
       setError("");
       try {
         const response = await axios.post(
-          "https://expense-tracker-1-itao.onrender.com/data-api",
+          "https://expense-tracker-1-itao.onrender.com/api/v1/data-api",
           {
             username: formData.username,
             email: formData.email,
