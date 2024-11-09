@@ -52,7 +52,7 @@ const LoginForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5050/api/v1/data-login",
+        "https://expense-tracker-1-itao.onrender.com/api/v1/data-login",
         {
           email: formData.email,
           password: formData.password,
@@ -216,6 +216,7 @@ const LoginStyled = styled.div`
   height: 100vh;
   background: #f2f2f2;
   box-shadow: 10px 4px 10px red;
+  
 
   .login-container {
     width: 400px;
@@ -225,6 +226,7 @@ const LoginStyled = styled.div`
     box-shadow: 0 0 15px 4px;
     text-align: center;
     animation: ${fadeIn} 0.5s ease-in-out;
+    margin-top: -70px;
 
     h2 {
       color: black;

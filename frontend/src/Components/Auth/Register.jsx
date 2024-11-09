@@ -51,7 +51,7 @@ const RegisterForm = () => {
       setError("");
       try {
         const response = await axios.post(
-          "http://localhost:5050/api/v1/data-api",
+          "https://expense-tracker-1-itao.onrender.com/api/v1/data-api",
           {
             username: formData.username,
             email: formData.email,
@@ -247,6 +247,7 @@ const RegisterStyled = styled.div`
     flex-direction: column;
     gap: 1.5rem;
     text-align: center;
+    margin-top: -60px;
 
     h2 {
       color: black;
