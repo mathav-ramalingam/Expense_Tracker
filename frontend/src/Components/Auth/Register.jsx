@@ -15,7 +15,7 @@ const Navbar = () => {
           <span className="app-title">Expense Tracker</span>
         </div>
         <div className="auth-buttons">
-          <a href="http://localhost:3000/">
+          <a href="https://mr-expense-tracker.vercel.app/">
             <button className="signup-btn">Login</button>{" "}
           </a>
           <button className="login-btn">Sign Up</button>
@@ -51,7 +51,7 @@ const RegisterForm = () => {
       setError("");
       try {
         const response = await axios.post(
-          "https://expense-tracker-1-itao.onrender.com/api/v1/data-api",
+          "https://expense-tracker-1-itao.onrender.com/data-api",
           {
             username: formData.username,
             email: formData.email,
@@ -119,7 +119,7 @@ const RegisterForm = () => {
             <button type="submit">Register</button>
             <ToastContainer />
             <a
-              href="http://localhost:3000/"
+              href="https://mr-expense-tracker.vercel.app/"
               style={{
                 textDecoration: "none",
                 color: "white",
