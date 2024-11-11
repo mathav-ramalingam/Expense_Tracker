@@ -276,7 +276,7 @@ const RegisterStyled = styled.div`
     flex-direction: column;
     gap: 1.5rem;
     text-align: center;
-    margin-top: -50px;
+    margin-top: -40px;
 
     h2 {
       color: black;
