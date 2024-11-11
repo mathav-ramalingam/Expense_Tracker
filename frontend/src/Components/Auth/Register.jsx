@@ -281,7 +281,7 @@ const RegisterStyled = styled.div`
     h2 {
       color: black;
       font-size: 2rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.2rem;
     }
 
     form {
