@@ -1,6 +1,5 @@
 import styled, { keyframes } from "styled-components";
 import React, { useState } from "react";
-//import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -16,7 +15,7 @@ const Navbar = () => {
         </div>
         <div className="auth-buttons">
           <a href="https://mr-expense-tracker.vercel.app/">
-            <button className="signup-btn">Login</button>{" "}
+            <button className="signup-btn">Login</button>
           </a>
           <button className="login-btn">Sign Up</button>
         </div>
@@ -33,9 +32,6 @@ const RegisterForm = () => {
     confirmPassword: "",
   });
 
-  const [error, setError] = useState("");
-  //const navigate = useNavigate(); // Initialize navigate
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -43,27 +39,60 @@ const RegisterForm = () => {
     });
   };
 
+  const validatePassword = (password) => {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    return password.length >= minLength && hasUpperCase && hasNumber;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords don't match!");
-    } else {
-      setError("");
-      try {
-        const response = await axios.post(
-          "https://expense-tracker-1-itao.onrender.com/api/v1/data-api",
-          {
-            username: formData.username,
-            email: formData.email,
-            password: formData.password,
-          }
-        );
 
-        console.log("Successfully sent !!!", response);
-        toast.success("Successfully Registered!");
-        //navigate("/"); // Redirect to login page after successful registration
-      } catch (error) {
-        console.log("Error", error);
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords don't match!");
+      return;
+    }
+
+    if (!validatePassword(formData.password)) {
+      toast.error(
+        "Password must be at least 8 characters long and contain at least one uppercase letter and one number."
+      );
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "https://expense-tracker-1-itao.onrender.com/api/v1/data-api",
+        {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
+
+      toast.success("Successfully Registered!");
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        const errorMessage = error.response.data.message;
+
+        if (errorMessage.includes("Multiple registrations detected")) {
+          toast.error(
+            "This email is already registered multiple times. Please use a different email."
+          );
+        } else {
+          toast.error(
+            "Email is already registered. Please use a different email."
+          );
+        }
+      } else {
+        toast.error("Registration failed. Please try again.");
       }
     }
   };
@@ -115,7 +144,6 @@ const RegisterForm = () => {
                 required
               />
             </div>
-            {error && <p className="error">{error}</p>}
             <button type="submit">Register</button>
             <ToastContainer />
             <a
@@ -135,16 +163,16 @@ const RegisterForm = () => {
             <p>or you can sign in with</p>
             <div className="social-login">
               <button className="social-icon google">
-                <i class="fa-brands fa-google"></i>
+                <i className="fa-brands fa-google"></i>
               </button>
               <button className="social-icon facebook">
-                <i class="fa-brands fa-facebook-f"></i>
+                <i className="fa-brands fa-facebook-f"></i>
               </button>
               <a
                 href="https://github.com/mathav-ramalingam/Expense_Tracker.git"
                 className="social-icon github"
               >
-                <i class="fa-brands fa-github"></i>
+                <i className="fa-brands fa-github"></i>
               </a>
             </div>
           </form>
@@ -193,7 +221,7 @@ const NavbarStyled = styled.nav`
       }
 
       .app-title {
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: bold;
         color: #fff;
       }
@@ -229,6 +257,7 @@ const RegisterStyled = styled.div`
   align-items: center;
   height: 100vh;
   background: #f2f2f2;
+  box-shadow: 10px 4px 10px red;
 
   .f {
     &:hover {
@@ -267,12 +296,6 @@ const RegisterStyled = styled.div`
         font-size: 1rem;
         width: 100%;
         box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .error {
-        color: red;
-        text-align: center;
-        font-weight: bold;
       }
 
       button {

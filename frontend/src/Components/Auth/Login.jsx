@@ -2,6 +2,8 @@ import styled, { keyframes } from "styled-components";
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import image from "../../img/image.png";
 
 const Navbar = () => {
@@ -15,7 +17,7 @@ const Navbar = () => {
         <div className="auth-buttons">
           <button className="login-btn">Login</button>
           <a href="/register">
-            <button className="signup-btn">Sign UP</button>{" "}
+            <button className="signup-btn">Sign Up</button>{" "}
           </a>
         </div>
       </div>
@@ -44,11 +46,9 @@ const LoginForm = () => {
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      setError("Please fill in all fields");
+      toast.error("Please fill in all fields");
       return;
     }
-
-    setError("");
 
     try {
       const response = await axios.post(
@@ -69,9 +69,9 @@ const LoginForm = () => {
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        setError("Invalid email or password");
+        toast.error("Invalid email or password");
       } else {
-        setError("Failed to log in. Please try again.");
+        toast.error("Failed to log in. Please try again.");
       }
     }
   };
@@ -135,6 +135,7 @@ const LoginForm = () => {
               </a>
             </div>
           </form>
+          <ToastContainer position="top-right" autoClose={3000} />
         </div>
       </LoginStyled>
     </>
@@ -179,7 +180,7 @@ const NavbarStyled = styled.nav`
       }
 
       .app-title {
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: bold;
         color: #fff;
       }
@@ -215,7 +216,13 @@ const LoginStyled = styled.div`
   align-items: center;
   height: 100vh;
   background: #f2f2f2;
-  box-shadow: 10px 4px 10px red;
+  box-shadow: 20px 8px 10px red;
+
+  .f {
+    &:hover {
+      color: black;
+    }
+  }
 
   .login-container {
     width: 400px;
@@ -247,7 +254,7 @@ const LoginStyled = styled.div`
         width: 100%;
       }
 
-      button[type="submit"] {
+      button {
         padding: 1rem;
         background-color: #27ae60;
         color: white;
