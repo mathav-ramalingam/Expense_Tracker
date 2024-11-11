@@ -144,13 +144,13 @@ function DownloadReport() {
 }
 
 const DownloadReportStyled = styled.div`
-  background: linear-gradient(145deg, #fce4ec, #f8bbd0);
-  border-radius: 16px;
+  background: linear-gradient(145deg, #fce4ec, smokewhite);
+  border-radius: 56px;
   padding: 2rem;
-  width: 85%;
+  width: 75%;
   height: auto;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 50px;
   box-shadow: 0px 4px 12px black;
   display: flex;
   flex-direction: column;
