@@ -323,6 +323,7 @@ const RegisterStyled = styled.div`
       display: flex;
       justify-content: center;
       gap: 1rem;
+      margin-bottom:-22px;
 
       .social-icon {
         background-color: white;
