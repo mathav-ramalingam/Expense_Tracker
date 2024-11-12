@@ -52,14 +52,20 @@ function Dashboard() {
           <div className="history-con">
             <History />
             <h2 className="salary-title">
-              Min <span>Salary</span>Max
+              Min <span>Income</span>Max
             </h2>
             <div className="salary-item">
               <p>
-                $ {incomes.length > 0 ? Math.min(...incomes.map((item) => item.amount)) : 0}
+                ${" "}
+                {incomes.length > 0
+                  ? Math.min(...incomes.map((item) => item.amount))
+                  : 0}
               </p>
               <p>
-                $ {incomes.length > 0 ? Math.max(...incomes.map((item) => item.amount)) : 0}
+                ${" "}
+                {incomes.length > 0
+                  ? Math.max(...incomes.map((item) => item.amount))
+                  : 0}
               </p>
             </div>
             <h2 className="salary-title">
@@ -67,10 +73,16 @@ function Dashboard() {
             </h2>
             <div className="salary-item">
               <p>
-                $ {expenses.length > 0 ? Math.min(...expenses.map((item) => item.amount)) : 0}
+                ${" "}
+                {expenses.length > 0
+                  ? Math.min(...expenses.map((item) => item.amount))
+                  : 0}
               </p>
               <p>
-                $ {expenses.length > 0 ? Math.max(...expenses.map((item) => item.amount)) : 0}
+                ${" "}
+                {expenses.length > 0
+                  ? Math.max(...expenses.map((item) => item.amount))
+                  : 0}
               </p>
             </div>
           </div>
@@ -273,7 +285,3 @@ const DashboardStyled = styled.div`
 `;
 
 export default Dashboard;
-
-
-
-
